@@ -3,14 +3,27 @@ import speech_recognition as sr
 import pyttsx3
 import datetime
 import threading
+from PIL import Image
+import os
 
+# Mete mòd aparans ak tèm
 ctk.set_appearance_mode("Système")  # Oswa "Clair" ou "Sombre"
 ctk.set_default_color_theme("blue")
 
+# Kreye fenèt aplikasyon an
 fichye_fenèt = ctk.CTk()
 fichye_fenèt.title("Ajchat Vocal")
 fichye_fenèt.geometry("500x300")
 
+# Chaje logo a
+image_path = os.path.join("images", "ajchat_logo.png")  # Asire logo a sou folder 'images'
+logo_image = ctk.CTkImage(Image.open(image_path), size=(150, 150))
+
+# Kreye etikèt pou logo a
+logo_label = ctk.CTkLabel(fichye_fenèt, image=logo_image, text="")
+logo_label.pack(pady=10)  # Ajoute logo anwo fenèt la
+
+# Etikèt pou repons
 etikèt_repons = ctk.CTkLabel(fichye_fenèt, text="Ajchat pare pou sèvi ou...", font=("Arial", 16))
 etikèt_repons.pack(pady=20)
 
@@ -53,7 +66,9 @@ def koute_thread():
     t = threading.Thread(target=koute)
     t.start()
 
+# Bouton pou koute vwa
 bouton_koute = ctk.CTkButton(fichye_fenèt, text="Koute vwa mwen", command=koute_thread)
 bouton_koute.pack(pady=20)
 
+# Lanse aplikasyon an
 fichye_fenèt.mainloop()
