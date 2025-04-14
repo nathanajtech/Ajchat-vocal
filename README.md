@@ -1,4 +1,7 @@
 # Ajchat Vocal
+<p align="center">
+  <img src="images/ajchat_logo.png" alt="Ajchat Vocal Logo" width="200"/>
+</p>
 
 **Ajchat Vocal** se yon asistan vwa an kreyòl ki ka koute sa w di epi reponn ou ak vwa.
 
