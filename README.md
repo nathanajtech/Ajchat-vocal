@@ -1,21 +1,27 @@
 # Ajchat Vocal
 
-Ajchat Vocal se yon asistan vwa entèlijan ki itilize Python pou koute sa w di, reponn ak vwa an Kreyòl. Li itilize bibliyotèk **speech recognition** ak **pyttsx3** pou entèraksyon vwa. 
+**Ajchat Vocal** se yon asistan vwa an kreyòl ki ka koute sa w di epi reponn ou ak vwa.
 
-## Karakteristik
-- Koute sa ou di (rekonesans vwa)
-- Reponn ak vwa an Kreyòl
-- Entèfas modèn ak **CustomTkinter**
-- Aksè fasil ak kontwòl (bouton pou aktive asistan an)
+## Fonksyonalite
 
-## Teknoloji
-- **Python**
-- **speechrecognition**
-- **pyttsx3**
-- **CustomTkinter**
+- Koute kòmand ou an kreyòl (ex: "Bonjou", "Ki lè li ye", "Orevwa")
+- Reponn ak vwa pa li
+- Entèfas modèn ak bouton pou kòmanse koute
+- Aksyon fèt an tan reyèl ak repons vizyèl sou fenèt la
+
+## Teknoloji itilize
+
+- Python
+- `SpeechRecognition` — pou rekonesans vwa
+- `pyttsx3` — pou pale ak ou
+- `customtkinter` — pou entèfas bèl ak modèn
+- `pipwin` — pou enstale `pyaudio` fasil sou Windows
 
 ## Enstalasyon
 
-1. **Klone** depo a oswa telechaje li:
-   ```bash
-   git clone https://github.com/username/ajchat-vocal.git
+```bash
+git clone https://github.com/nathanajtech/Ajchat-vocal.git
+cd Ajchat-vocal
+pip install -r requirements.txt
+pipwin install pyaudio
+python ajchat_vocal.py
