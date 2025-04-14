@@ -1,6 +1,18 @@
+import customtkinter as ctk
 import speech_recognition as sr
 import pyttsx3
 import datetime
+import threading
+
+ctk.set_appearance_mode("Système")  # Oswa "Clair" ou "Sombre"
+ctk.set_default_color_theme("blue")
+
+fichye_fenèt = ctk.CTk()
+fichye_fenèt.title("Ajchat Vocal")
+fichye_fenèt.geometry("500x300")
+
+etikèt_repons = ctk.CTkLabel(fichye_fenèt, text="Ajchat pare pou sèvi ou...", font=("Arial", 16))
+etikèt_repons.pack(pady=20)
 
 def pale(text):
     engine = pyttsx3.init()
@@ -10,18 +22,18 @@ def pale(text):
 def koute():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Koute...")
+        etikèt_repons.configure(text="Koute...")
         audio = r.listen(source)
     try:
         command = r.recognize_google(audio, language="ht-HT")
-        print(f"Ou di: {command}")
-        return command.lower()
+        etikèt_repons.configure(text=f"Ou di: {command}")
+        reponn(command.lower())
     except sr.UnknownValueError:
         pale("Mwen pa tande byen. Tanpri repete.")
-        return ""
+        etikèt_repons.configure(text="Mwen pa tande byen.")
     except sr.RequestError:
         pale("Sistèm rekonesans vwa a pa disponib.")
-        return ""
+        etikèt_repons.configure(text="Erè koneksyon ak sèvis vwa.")
 
 def reponn(command):
     if "bonjou" in command:
@@ -29,15 +41,19 @@ def reponn(command):
     elif "ki lè li ye" in command:
         now = datetime.datetime.now().strftime("%H:%M")
         pale(f"Kounye a li {now}")
-    elif "au revoir" in command or "orevwa" in command:
+    elif "orevwa" in command:
         pale("Oke, n a wè pita!")
-        exit()
+        etikèt_repons.configure(text="Fèmen aplikasyon an...")
+        fichye_fenèt.after(2000, fichye_fenèt.destroy)
     else:
         pale("Mwen pa konprann sa ou di a.")
+        etikèt_repons.configure(text="Mwen pa konprann sa...")
 
-if __name__ == "__main__":
-    pale("Ajchat Vocal pare pou sèvi ou.")
-    while True:
-        cmd = koute()
-        if cmd:
-            reponn(cmd)
+def koute_thread():
+    t = threading.Thread(target=koute)
+    t.start()
+
+bouton_koute = ctk.CTkButton(fichye_fenèt, text="Koute vwa mwen", command=koute_thread)
+bouton_koute.pack(pady=20)
+
+fichye_fenèt.mainloop()
